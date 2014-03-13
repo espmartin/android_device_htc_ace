@@ -1,3 +1,3 @@
-add_lunch_combo sm_ace-userdebug
-add_lunch_combo sm_ace-eng
-add_lunch_combo sm_ace
+add_lunch_combo pa_ace-userdebug
+add_lunch_combo pa_ace-eng
+add_lunch_combo pa_ace
