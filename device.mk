@@ -21,8 +21,8 @@ $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 $(call inherit-product, device/htc/ace/media_a1026.mk)
 $(call inherit-product, device/htc/ace/media_htcaudio.mk)
 
-# Inherit qcom proprietary blobs
-$(call inherit-product, vendor/qcom/proprietary/qcom-vendor.mk)
+# call the proprietary setup
+$(call inherit-product, vendor/htc/ace/ace-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/ace/overlay
 
@@ -149,6 +149,14 @@ PRODUCT_LOCALES += en_US
 
 # call the proprietary setup
 $(call inherit-product, vendor/htc/ace/ace-vendor.mk)
+
+# Odexed extra version and goo.im rom
+ifeq ($(TARGET_WITH_DEXPREOPT),true)
+ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
+TARGET_UNOFFICIAL_BUILD_ID := ODEXED-$(TARGET_UNOFFICIAL_BUILD_ID)
+else
+TARGET_UNOFFICIAL_BUILD_ID := ODEXED
+endif
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
