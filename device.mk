@@ -144,9 +144,6 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += en_US
 
-# call the proprietary setup
-$(call inherit-product, vendor/htc/ace/ace-vendor.mk)
-
 # Odexed extra version and goo.im rom
 ifeq ($(TARGET_WITH_DEXPREOPT),true)
 ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
