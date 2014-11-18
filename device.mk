@@ -144,14 +144,6 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += en_US
 
-# Odexed extra version and goo.im rom
-ifeq ($(TARGET_WITH_DEXPREOPT),true)
-ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-TARGET_UNOFFICIAL_BUILD_ID := ODEXED-$(TARGET_UNOFFICIAL_BUILD_ID)
-else
-TARGET_UNOFFICIAL_BUILD_ID := ODEXED
-endif
-
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
