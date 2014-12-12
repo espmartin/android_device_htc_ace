@@ -8,6 +8,10 @@ on init
     mkdir /storage/sdcard0 0700 root root
     export EXTERNAL_STORAGE /storage/sdcard0
 
+    #sd-ext
+    mkdir /sd-ext 0700 root root
+    export SD_EXT_DIRECTORY /sd-ext
+
     # Support legacy paths
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
@@ -70,12 +74,12 @@ on boot
 
     # bluetooth power up/down interface
     chown bluetooth bluetooth /dev/ttyHS0
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
 
     # Bluetooth MAC address programming
-    chown bluetooth net_bt_stack /sys/module/htc_bdaddress/parameters/bdaddress
+    chown bluetooth bluetooth /sys/module/htc_bdaddress/parameters/bdaddress
     setprop ro.bt.bdaddr_path /sys/module/htc_bdaddress/parameters/bdaddress
     chown system system /sys/class/switch/dock/bt_pin
 

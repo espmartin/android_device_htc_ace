@@ -104,12 +104,15 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 PRODUCT_COPY_FILES += \
 	$(COMMON_PATH)/rootdir/system/vendor/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd
 
-# GPS / BT / Lights / Sensors
+# BT / Lights / Sensors
 PRODUCT_PACKAGES += \
 	libbt-vendor \
 	lights.spade \
-	sensors.spade \
-	librpc
+	sensors.spade
+
+# Proximity Recalibrator
+PRODUCT_PACKAGES += \
+	ProximityRecalibrator
 
 # Proximity Recalibrator
 PRODUCT_PACKAGES += \
@@ -143,6 +146,13 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 PRODUCT_LOCALES += en_US
+
+ifeq ($(DISABLE_SECURITY),true)
+# Disable ADB authentication and use root shell
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.adb.secure=0 \
+	ro.secure=0
+endif
 
 # call dalvik heap config
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
