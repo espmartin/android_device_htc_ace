@@ -162,7 +162,7 @@ ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.heapgrowthlimit=36m
 
 # Discard inherited values and use our own instead.
 PRODUCT_DEVICE := ace
-PRODUCT_NAME := ace
+PRODUCT_NAME := aokp_ace
 PRODUCT_BRAND := htc_wwe
 PRODUCT_MODEL := Desire HD
 PRODUCT_MANUFACTURER := HTC
