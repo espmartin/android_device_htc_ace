@@ -32,6 +32,7 @@
 -include vendor/htc/ace/BoardConfigVendor.mk
 
 TARGET_BOOTLOADER_BOARD_NAME := spade
+TARGET_CPU_VARIANT := scorpion
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 androidboot.selinux=permissive
 BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE) msmsdcc_power_gpio=88
