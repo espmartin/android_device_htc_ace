@@ -30,13 +30,9 @@ COMMON_PATH := device/htc/ace
 
 # Boot ramdisk setup
 PRODUCT_COPY_FILES += \
-	$(COMMON_PATH)/ramdisk/fstab.spade:root/fstab.spade \
-	$(COMMON_PATH)/ramdisk/init.spade.rc:root/init.spade.rc \
-	$(COMMON_PATH)/ramdisk/ueventd.spade.rc:root/ueventd.spade.rc
-
-# GPS config
-PRODUCT_COPY_FILES += \
-	$(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf
+	$(COMMON_PATH)/rootdir/fstab.spade:root/fstab.spade \
+	$(COMMON_PATH)/rootdir/init.spade.rc:root/init.spade.rc \
+	$(COMMON_PATH)/rootdir/ueventd.spade.rc:root/ueventd.spade.rc
 
 # ACDB
 PRODUCT_COPY_FILES += \
@@ -114,10 +110,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	ProximityRecalibrator
 
-# Proximity Recalibrator
-PRODUCT_PACKAGES += \
-	ProximityRecalibrator
-
 # Permissions
 PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
@@ -126,18 +118,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.setupwizard.enable_bypass=1 \
 	ro.com.google.gmsversion=2.3_r3
+PRODUCT_PACKAGES += ProximityRecalibrator
 
 # Override /proc/sys/vm/dirty_ratio on UMS
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.vold.umsdirtyratio=20
-
-# Use cache partition for system app dexopt
-PRODUCT_PROPERTY_OVERRIDES += \
-	dalvik.vm.dexopt-data-only=0
-
-# Use KSM by default
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.ksm.default=1
 
 # Set build date
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
@@ -154,11 +139,14 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.secure=0
 endif
 
-# call dalvik heap config
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+# ODPUpdater
+PRODUCT_PACKAGES += ODPUpdater
 
-# lower the increment
-ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.heapgrowthlimit=36m
+ifeq ($(TARGET_UNOFFICIAL_BUILD_ID),)
+PRODUCT_PROPERTY_OVERRIDES += ro.odp.releasetype=NIGHTLY
+else
+PRODUCT_PROPERTY_OVERRIDES += ro.odp.releasetype=SNAPSHOT
+endif
 
 # Discard inherited values and use our own instead.
 PRODUCT_DEVICE := ace
