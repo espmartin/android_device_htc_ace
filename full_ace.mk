@@ -12,5 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_ace.mk
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Inherit from ace device
+$(call inherit-product, device/htc/ace/ace.mk)
+
+# Boot Animation
+TARGET_SCREEN_HEIGHT := 800
+TARGET_SCREEN_WIDTH := 480
+
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := full_ace
+PRODUCT_DEVICE := ace
+PRODUCT_BRAND := htc_wwe
+PRODUCT_MANUFACTURER := HTC
+PRODUCT_MODEL := Desire HD

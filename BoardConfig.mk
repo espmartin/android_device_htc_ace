@@ -34,7 +34,7 @@
 TARGET_BOOTLOADER_BOARD_NAME := spade
 TARGET_CPU_VARIANT := generic
 
-BOARD_KERNEL_CMDLINE := no_console_suspend=1 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := no_console_suspend=1 androidboot.selinux=permissive androidboot.hardware=htc7x30
 BOARD_KERNEL_RECOVERY_CMDLINE := $(BOARD_KERNEL_CMDLINE) msmsdcc_power_gpio=88
 BOARD_KERNEL_BASE := 0x4000000
 BOARD_KERNEL_PAGE_SIZE := 4096
@@ -63,7 +63,7 @@ TARGET_KERNEL_CONFIG := spade_defconfig
 #TARGET_PREBUILT_KERNEL := device/htc/ace/prebuilt/kernel/kernel
 
 TARGET_NO_SEPARATE_RECOVERY := true
-TARGET_RECOVERY_FSTAB := device/htc/ace/rootdir/fstab.spade
+TARGET_RECOVERY_FSTAB := device/htc/msm7x30-common/rootdir/fstab.htc7x30
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
@@ -101,8 +101,8 @@ TW_NO_SCREEN_BLANK := true
 TW_INCLUDE_DUMLOCK := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 #RECOVERY_VARIANT := twrp
-TW_EXCLUDE_MTP := true
 TW_NO_CPU_TEMP := true
+TW_NO_USB_STORAGE := true
 
 ifeq ($(USE_DEXPREOPT),true)
     # Enable dex-preoptimization to speed up first boot sequence
